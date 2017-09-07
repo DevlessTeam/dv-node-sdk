@@ -6,7 +6,7 @@ function Devless(url, token) {
   //CRUD functions
 
   //Add data to service table
-  this.addData = function(serviceName, tableName, data) {
+  this.addData = function(serviceName, tableName, data, callback) {
     let config = {
       headers: {
         "Devless-token": token
@@ -20,8 +20,8 @@ function Devless(url, token) {
           "field": [data]
         }]
       }, config
-    ).then(response => {
-      console.log(response.data);
+    ).then(function (response) {
+      callback(response);
     })
       .catch(error => {
         console.error(error);
@@ -29,7 +29,7 @@ function Devless(url, token) {
   }
 
   //Query data from service table
-  this.queryData = function (serviceName, tableName, params) {
+  this.queryData = function (serviceName, tableName, params, callback) {
     let config = {
       headers: {
         "Devless-token": token
@@ -40,8 +40,8 @@ function Devless(url, token) {
       {
         params: params
       }, config
-    ).then(response => {
-      console.log(response.data);
+    ).then(function (response) {
+      callback(response);
     })
       .catch(error => {
         console.error(error);
@@ -49,7 +49,7 @@ function Devless(url, token) {
   }
 
   //Update data in service table
-  this.updateData = function (serviceName, tableName, identifierField, identifierValue, data) {
+  this.updateData = function (serviceName, tableName, identifierField, identifierValue, data, callback) {
     let config = {
       headers: {
         "Devless-token": token
@@ -69,8 +69,8 @@ function Devless(url, token) {
     axios.patch(
       url + "/api/v1/service/" + serviceName + "/db",
       payload, config
-    ).then(response => {
-      console.log(response.data);
+    ).then(function (response) {
+      callback(response);
     })
       .catch(error => {
         console.error(error);
