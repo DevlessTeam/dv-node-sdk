@@ -12,7 +12,7 @@ function Devless(url, token) {
         "Devless-token": token
       }
     };
-    return axios.post(
+    axios.post(
       url + "/api/v1/service/" + serviceName + "/db",
       {
         "resource": [{
@@ -35,12 +35,16 @@ function Devless(url, token) {
         "Devless-token": token
       }
     };
-    axios.get(
-      url + "/api/v1/service/" + serviceName + "/db?table=" + tableName,
-      {
+    axios({
+      method: 'get',
+      url: url + "/api/v1/service/" + serviceName + "/db?table=" + tableName,
+      headers: {
+        "Devless-token": token
+      },
+      data: {
         params: params
-      }, config
-    ).then(function (response) {
+      }
+    }).then(function (response) {
       callback(response);
     })
       .catch(error => {
@@ -55,21 +59,50 @@ function Devless(url, token) {
         "Devless-token": token
       }
     };
-    var payload = {
-      "resource": [{
-        "name": tableName,
-        "params": [{
-          "where": identifierField + ',' + identifierValue,
-          "data": [
-            data
-          ]
-        }]
-      }]
-    }
     axios.patch(
       url + "/api/v1/service/" + serviceName + "/db",
-      payload, config
+      {
+        "resource": [{
+          "name": tableName,
+          "params": [{
+            "where": identifierField + ',' + identifierValue,
+            "data": [
+              data
+            ]
+          }]
+        }]
+      }, config
     ).then(function (response) {
+      callback(response);
+    })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  //Delete data in service table
+  this.deleteData = function (serviceName, tableName, identifierField, identifierValue, callback) {
+    let config = {
+      headers: {
+        "Devless-token": token
+      }
+    };
+    axios({
+      method: 'delete',
+      headers: {
+        "Devless-token": token
+      },
+      url: url + "/api/v1/service/" + serviceName + "/db",
+      data: {
+        "resource": [{
+          "name": tableName,
+          "params": [{
+            "where": identifierField + ',' + identifierValue,
+            "delete": true
+          }]
+        }]
+      }
+    }).then(function (response) {
       callback(response);
     })
       .catch(error => {
