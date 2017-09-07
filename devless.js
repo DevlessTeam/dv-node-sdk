@@ -2,9 +2,9 @@
 
 const axios = require('axios');
 
-let devless = {
+function Devless (url, token) {
   //Add data to service table
-  add: (url, token, serviceName, tableName, data) => {
+  this.addData = function(serviceName, tableName, data) {
     let config = {
       headers: {
         "Devless-token": token
@@ -27,4 +27,4 @@ let devless = {
   }
 }
 
-module.exports = devless
+module.exports = Devless
