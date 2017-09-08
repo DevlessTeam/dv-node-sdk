@@ -125,6 +125,77 @@ function Devless(url, token) {
         console.log(error);
       });
   }
+
+
+  //Create, Delete table
+
+  //create table
+  this.createTable = function (serviceName, tableDetails, callback) {
+    axios({
+      method: 'post',
+      headers: {
+        "Devless-token": token
+      },
+      url: url + "/api/v1/service/" + serviceName + "/schema",
+      data: {
+        "resource": [tableDetails]
+      }
+    }).then(function (response) {
+      callback(response.data);
+    })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  //delete table data aka truncate
+  this.deleteTableData = function (serviceName, tableName, callback) {
+    axios({
+      method: 'delete',
+      headers: {
+        "Devless-token": token
+      },
+      url: url + "/api/v1/service/" + serviceName + "/db",
+      data: {
+        "resource": [{
+          "name": tableName,
+          "params": [{
+            "truncate": true
+          }]
+        }]
+      }
+    }).then(function (response) {
+      callback(response.data);
+    })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
+  //General RPC call
+
+  //RPC call
+  this.rpc = function (serviceName, action, params, callback) {
+    axios({
+      method: 'post',
+      headers: {
+        "Devless-token": token
+      },
+      url: url + "/api/v1/service/" + serviceName + "/rpc?action=" + action,
+      data: {
+        "jsonrpc": "2.0",
+        "method": serviceName,
+        "id": "1000",
+        "params": params
+      }
+    }).then(function (response) {
+      callback(response.data);
+    })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 }
 
 module.exports = Devless
