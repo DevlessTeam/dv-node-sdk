@@ -21,7 +21,7 @@ function Devless(url, token) {
         }]
       }, config
     ).then(function (response) {
-      callback(response);
+      callback(response.data);
     })
       .catch(function (error) {
         console.log(error);
@@ -41,7 +41,7 @@ function Devless(url, token) {
         "Devless-token": token
       }
     }).then(function (response) {
-      callback(response);
+      callback(response.data);
     })
       .catch(function (error) {
         console.log(error);
@@ -69,7 +69,7 @@ function Devless(url, token) {
         }]
       }, config
     ).then(function (response) {
-      callback(response);
+      callback(response.data);
     })
       .catch(function (error) {
         console.log(error);
@@ -94,7 +94,7 @@ function Devless(url, token) {
         }]
       }
     }).then(function (response) {
-      callback(response);
+      callback(response.data);
     })
       .catch(function (error) {
         console.log(error);
