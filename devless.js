@@ -3,7 +3,7 @@
 const axios = require('axios');
 
 function Devless(url, token) {
-  //CRUD functions
+  //CRUD
 
   //Add data to service table
   this.addData = function(serviceName, tableName, data, callback) {
@@ -95,6 +95,31 @@ function Devless(url, token) {
       }
     }).then(function (response) {
       callback(response);
+    })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
+  //Authentication
+
+  //actions: signup, login
+  this.authenticate = function (action, params, callback) {
+    axios({
+      method: 'post',
+      headers: {
+        "Devless-token": token
+      },
+      url: url + "/api/v1/service/devless/rpc?action=" + action,
+      data: {
+        "jsonrpc": "2.0",
+        "method": "devless",
+        "id": "1000",
+        "params": params
+      }
+    }).then(function (response) {
+      callback(response.data);
     })
       .catch(function (error) {
         console.log(error);
