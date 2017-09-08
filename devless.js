@@ -78,11 +78,6 @@ function Devless(url, token) {
 
   //Delete data in service table
   this.deleteData = function (serviceName, tableName, identifierField, identifierValue, callback) {
-    let config = {
-      headers: {
-        "Devless-token": token
-      }
-    };
     axios({
       method: 'delete',
       headers: {
