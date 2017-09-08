@@ -23,32 +23,28 @@ function Devless(url, token) {
     ).then(function (response) {
       callback(response);
     })
-      .catch(error => {
-        console.error(error);
+      .catch(function (error) {
+        console.log(error);
       });
   }
 
   //Query data from service table
   this.queryData = function (serviceName, tableName, params, callback) {
-    let config = {
-      headers: {
-        "Devless-token": token
-      }
-    };
+    let queryParams = "";
+    for (let item in params) {
+      queryParams += "&" + item + "=" + params[item];
+    }
     axios({
       method: 'get',
-      url: url + "/api/v1/service/" + serviceName + "/db?table=" + tableName,
+      url: url + "/api/v1/service/" + serviceName + "/db?table=" + tableName + queryParams,
       headers: {
         "Devless-token": token
-      },
-      data: {
-        params: params
       }
     }).then(function (response) {
       callback(response);
     })
-      .catch(error => {
-        console.error(error);
+      .catch(function (error) {
+        console.log(error);
       });
   }
 
@@ -75,8 +71,8 @@ function Devless(url, token) {
     ).then(function (response) {
       callback(response);
     })
-      .catch(error => {
-        console.error(error);
+      .catch(function (error) {
+        console.log(error);
       });
   }
 
@@ -105,8 +101,8 @@ function Devless(url, token) {
     }).then(function (response) {
       callback(response);
     })
-      .catch(error => {
-        console.error(error);
+      .catch(function (error) {
+        console.log(error);
       });
   }
 }
