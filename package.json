@@ -1,5 +1,5 @@
 {
-  "name": "devless",
+  "name": "devless-sdk",
   "version": "0.0.1",
   "description": "DevLess nodejs SDK",
   "main": "devless.js",
