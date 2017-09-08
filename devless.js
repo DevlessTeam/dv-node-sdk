@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 
-const axios = require('axios');
+const axios = require("axios");
 
 function Devless(url, token) {
   //CRUD
 
   //Add data to service table
-  this.addData = function(serviceName, tableName, data, callback) {
+  this.addData = function (serviceName, tableName, data, callback) {
     let config = {
       headers: {
         "Devless-token": token
@@ -24,18 +24,20 @@ function Devless(url, token) {
       callback(response.data);
     })
       .catch(function (error) {
-        console.log(error);
+        callback(error);
       });
-  }
+  };
 
   //Query data from service table
   this.queryData = function (serviceName, tableName, params, callback) {
     let queryParams = "";
     for (let item in params) {
-      queryParams += "&" + item + "=" + params[item];
+      if (params.hasOwnProperty(item)) {
+        queryParams += "&" + item + "=" + params[item];
+      }
     }
     axios({
-      method: 'get',
+      method: "get",
       url: url + "/api/v1/service/" + serviceName + "/db?table=" + tableName + queryParams,
       headers: {
         "Devless-token": token
@@ -44,9 +46,9 @@ function Devless(url, token) {
       callback(response.data);
     })
       .catch(function (error) {
-        console.log(error);
+        callback(error);
       });
-  }
+  };
 
   //Update data in service table
   this.updateData = function (serviceName, tableName, identifierField, identifierValue, data, callback) {
@@ -61,7 +63,7 @@ function Devless(url, token) {
         "resource": [{
           "name": tableName,
           "params": [{
-            "where": identifierField + ',' + identifierValue,
+            "where": identifierField + "," + identifierValue,
             "data": [
               data
             ]
@@ -72,14 +74,14 @@ function Devless(url, token) {
       callback(response.data);
     })
       .catch(function (error) {
-        console.log(error);
+        callback(error);
       });
-  }
+  };
 
   //Delete data in service table
   this.deleteData = function (serviceName, tableName, identifierField, identifierValue, callback) {
     axios({
-      method: 'delete',
+      method: "delete",
       headers: {
         "Devless-token": token
       },
@@ -88,7 +90,7 @@ function Devless(url, token) {
         "resource": [{
           "name": tableName,
           "params": [{
-            "where": identifierField + ',' + identifierValue,
+            "where": identifierField + "," + identifierValue,
             "delete": true
           }]
         }]
@@ -97,9 +99,9 @@ function Devless(url, token) {
       callback(response.data);
     })
       .catch(function (error) {
-        console.log(error);
+        callback(error);
       });
-  }
+  };
 
 
   //Authentication
@@ -107,7 +109,7 @@ function Devless(url, token) {
   //actions: signup, login
   this.authenticate = function (action, params, callback) {
     axios({
-      method: 'post',
+      method: "post",
       headers: {
         "Devless-token": token
       },
@@ -122,9 +124,9 @@ function Devless(url, token) {
       callback(response.data);
     })
       .catch(function (error) {
-        console.log(error);
+        callback(error);
       });
-  }
+  };
 
 
   // //Create, Delete table
@@ -178,7 +180,7 @@ function Devless(url, token) {
   //RPC call
   this.rpc = function (serviceName, action, params, callback) {
     axios({
-      method: 'post',
+      method: "post",
       headers: {
         "Devless-token": token
       },
@@ -195,7 +197,7 @@ function Devless(url, token) {
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
 }
 
-module.exports = Devless
+module.exports = Devless;
