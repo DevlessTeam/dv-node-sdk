@@ -1,6 +1,6 @@
 {
   "name": "devless-sdk",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.1",
   "description": "DevLess nodejs SDK",
   "main": "devless.js",
   "scripts": {
