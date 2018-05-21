@@ -1,10 +1,10 @@
 {
   "name": "devless-sdk",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1",
   "description": "DevLess nodejs SDK",
-  "main": "devless.js",
+  "main": "app.js",
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -16,13 +16,17 @@
     "node",
     "baas"
   ],
-  "author": "John Otu <johnne01@gmail.com> (https://github.com/johnotu)",
+  "author": "Terrence Owusu <owusuterrence@gmail.com> (https://github.com/thedma04)",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/DevlessTeam/dv-node-sdk/issues"
   },
   "homepage": "https://github.com/DevlessTeam/dv-node-sdk#readme",
   "dependencies": {
-    "axios": "^0.16.2"
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "jest": "^22.4.3",
+    "supertest": "^3.1.0"
   }
 }

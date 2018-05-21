@@ -30,23 +30,24 @@ And you can now have access to all the methods exposed by the module. They inclu
 
 **Query (read) data from table**
 ```javascript
-dv.queryData(serviceName, tableName, queryParams, callback);
+dv.queryData(serviceName, tableName, queryParams);
 ```
 
 **Add data to table**
 ```javascript
-dv.addData(serviceName, tableName, data, callback);
+dv.addData(serviceName, tableName, data);
 ```
 
 **Update data in table**
 ```javascript
-dv.updateData(serviceName, tableName, identifierField, identifierValue, data, callback);
+dv.updateData(serviceName, tableName, identifierField, identifierValue, data);
 ```
 
 **Delete data from table**
 ```javascript
-dv.deleteData(serviceName, tableName, identifierField, identifierValue, callback);
+dv.deleteData(serviceName, tableName, identifierField, identifierValue);
 ```
+
 
 
 ### Authentication
@@ -54,13 +55,84 @@ dv.deleteData(serviceName, tableName, identifierField, identifierValue, callback
 For *action*s including **signup** and **login**.
 
 ```javascript
-dv.authenticate(action, params, callback);
+dv.signup(params);
+```
+
+
+```javascript
+dv.login(params);
 ```
 
 ### RPC
 
 ```javascript
-dv.rpc(serviceName, action, params, callback);
+dv.call(serviceName, action, params, callback);
 ```
+
+#Example
+const dv = new DevLess("http://my-devlessapp.herokuapp.com", "5a5d555d55ds5a5e45ss2")
+
+**And you can now have access to all the methods exposed by the module. They include:**
+
+#USING EXPRESS
+   
+    ```javascript
+    $ npm install express -s
+    ```
+
+
+    ```javascript
+    const express = require('express')
+
+    const app = express()
+
+
+    Creating Record 
+
+    dv.addData(serviceName, tableName, queryParams)
+    This will return a promise
+
+    Example
+
+    app.post('/', async(req, res)=>{
+        let data = {
+         name: "",
+         description: "This is all night waakye for the students at Lancaster",
+         location: "AnC Mall",
+        }
+        const resp =  await dv.addData('Events', 'event', data)
+
+            #OR
+
+        const resp = await dv.addData('Events', 'event', req.body)
+    })
+
+
+
+     #### Creating Record 
+
+    dv.queryData(serviceName, tableName, queryParams)
+    This will return a promise
+
+    ### Example 
+    app.post('/', async(req, res)=>{
+        let data = {
+         name: "",
+         description: "This is all night waakye for the students at Lancaster",
+         location: "AnC Mall",
+        }
+        const resp =  await dv.addData('Events', 'event', data)
+
+            #OR
+
+        const resp = await dv.addData('Events', 'event', req.body)
+    })
+
+
+    app.listen(3000, function(){
+        console.log('Server started')
+    })
+    ```
+
 
 Note: This readme is a *WIP*. For more info on parameter definitions, etc, see the [DevLess Documentation](https://devless.gitbooks.io/devless-docs-1-3-0/http_api.html).
