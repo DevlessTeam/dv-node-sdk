@@ -23,7 +23,7 @@ function DevLess(url, token){
      * @param {object} data 
      * returns Promise <object>
      */
-    this.addData = async (serviceName, tableName, data={})=>{
+    this.addData = async (serviceName, tableName, data={}) => {
         try {
             return (await axios.post(`${this.url}${urlPending}${serviceName}/db`,{
                 "resource": [{
@@ -34,7 +34,7 @@ function DevLess(url, token){
         } catch (e) {
             return e;
         }
-    }
+    };
 
 
     /**
@@ -52,7 +52,7 @@ function DevLess(url, token){
         } catch (e) {
             return e;
         }
-    }
+    };
 
 
 
@@ -78,7 +78,7 @@ function DevLess(url, token){
         } catch (e) {
             return e;
         }
-    }
+    };
 
     /**
      * 
@@ -101,7 +101,7 @@ function DevLess(url, token){
         } catch (e) {
             return e;
         }
-    }
+    };
 
 
     /**
@@ -110,13 +110,13 @@ function DevLess(url, token){
      */
     this.signup = async (params={}) => {
         try {
-            return (await this.call('devless', 'signUp', [params.email || null, params.password,
+            return (await this.call("devless", "signUp", [params.email || null, params.password,
                 params.username|| null, params.phone || null, params.firstname || null, params.lastname || null,null,null, params.extra]
             ));
         } catch (e) {
             return e;
         }
-    }
+    };
 
     /**
      * Login the user and set in the token
@@ -124,7 +124,7 @@ function DevLess(url, token){
      */
     this.login = async (params={}) => {
         try {
-            const resp = (await this.call('devless', 'login', [params.username || null, params.email || null,
+            const resp = (await this.call("devless", "login", [params.username || null, params.email || null,
                     params.phone|| null, params.password || null]
             ));
         this.setToken(resp.payload.result.token)
@@ -139,7 +139,7 @@ function DevLess(url, token){
      * @param {String} token 
      */
     this.setToken = token => {
-        return axios.defaults.headers.common['devless-user-token'] = token;
+        return axios.defaults.headers.common["devless-user-token"] = token;
     }
 
     /**
