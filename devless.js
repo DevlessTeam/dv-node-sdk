@@ -1,21 +1,21 @@
-const axios = require('axios')
-const express = require('express')
+const axios = require("axios");
+const express = require("express");
 
 
 // Setting variables for common url pattern
-const urlPending = "/api/v1/service/"
-const tableType =   "/db?table="
+const urlPending = "/api/v1/service/";
+const tableType =   "/db?table=";
 
 
-const app = express()
+const app = express();
 
 
 function DevLess(url, token){
-    this.url = url
-    this.token = token
+    this.url = url;
+    this.token = token;
 
     // Setting default headers for the devless token
-    axios.defaults.headers.common["Devless-token"] = this.token
+    axios.defaults.headers.common["Devless-token"] = this.token;
 
     /**
      * @param {String} serviceName 
@@ -30,9 +30,9 @@ function DevLess(url, token){
                     "name": tableName,
                     "field": [data]
                 }]
-            })).data
+            })).data;
         } catch (e) {
-            return e
+            return e;
         }
     }
 
@@ -46,11 +46,11 @@ function DevLess(url, token){
     this.queryData = async (serviceName, tableName, params=null) => {
         try {
             if(params !== null){
-              return (await axios.get(`${this.url}${urlPending}${serviceName}${tableType}${tableName}&${params}`)).data
+              return (await axios.get(`${this.url}${urlPending}${serviceName}${tableType}${tableName}&${params}`)).data;
             }
-            return (await axios.get(`${this.url}${urlPending}${serviceName}${tableType}${tableName}`)).data
+            return (await axios.get(`${this.url}${urlPending}${serviceName}${tableType}${tableName}`)).data;
         } catch (e) {
-            return e
+            return e;
         }
     }
 
@@ -74,9 +74,9 @@ function DevLess(url, token){
                         "data": [data]
                     }]
                 }]
-            })).data
+            })).data;
         } catch (e) {
-            return e
+            return e;
         }
     }
 
@@ -97,9 +97,9 @@ function DevLess(url, token){
                         "delete":true
                     }]
                 }]
-            })).data
+            })).data;
         } catch (e) {
-            return e
+            return e;
         }
     }
 
@@ -112,9 +112,9 @@ function DevLess(url, token){
         try {
             return (await this.call('devless', 'signUp', [params.email || null, params.password,
                 params.username|| null, params.phone || null, params.firstname || null, params.lastname || null,null,null, params.extra]
-            ))
+            ));
         } catch (e) {
-            return e
+            return e;
         }
     }
 
@@ -126,11 +126,11 @@ function DevLess(url, token){
         try {
             const resp = (await this.call('devless', 'login', [params.username || null, params.email || null,
                     params.phone|| null, params.password || null]
-            ))
+            ));
         this.setToken(resp.payload.result.token)
-        return resp
+        return resp;
         } catch (e) {
-            return e
+            return e;
         }
     }
 
@@ -139,7 +139,7 @@ function DevLess(url, token){
      * @param {String} token 
      */
     this.setToken = token => {
-        return axios.defaults.headers.common['devless-user-token'] = token
+        return axios.defaults.headers.common['devless-user-token'] = token;
     }
 
     /**
@@ -149,7 +149,7 @@ function DevLess(url, token){
      * @returns randomNumber
      */
     const nonce = (min, max) => {
-        return Math.floor(Math.random() * (min - min +1)) + min
+        return Math.floor(Math.random() * (min - min +1)) + min;
     }
 
     /**
@@ -165,14 +165,12 @@ function DevLess(url, token){
                 "method": serviceName,
                 "id": nonce(1, 10000),
                 "params": params    
-        })).data
+        })).data;
        } catch (e) {
-           return e
+           return e;
        }
     }
     
 }
 
-
-
-module.exports = DevLess
+module.exports = DevLess;
