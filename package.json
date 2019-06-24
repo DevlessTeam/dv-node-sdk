@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/DevlessTeam/dv-node-sdk#readme",
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.1"
   }
 }
