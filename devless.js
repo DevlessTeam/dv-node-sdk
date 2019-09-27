@@ -1,6 +1,7 @@
 "use strict";
 
 const axios = require("axios");
+const promisify = require('./helper')
 
 function Devless(url, token) {
   //CRUD
@@ -28,6 +29,8 @@ function Devless(url, token) {
       });
   };
 
+  this.asyncAddData = promisify(this.addData)
+
   //Query data from service table
   this.queryData = function (serviceName, tableName, params, callback) {
     let queryParams = "";
@@ -49,6 +52,8 @@ function Devless(url, token) {
         callback(error);
       });
   };
+
+  this.asyncQueryData = promisify(this.queryData)
 
   //Update data in service table
   this.updateData = function (serviceName, tableName, identifierField, identifierValue, data, callback) {
@@ -78,6 +83,8 @@ function Devless(url, token) {
       });
   };
 
+  this.asyncUpdateData = promisify(this.updateData)
+
   //Delete data in service table
   this.deleteData = function (serviceName, tableName, identifierField, identifierValue, callback) {
     axios({
@@ -103,6 +110,7 @@ function Devless(url, token) {
       });
   };
 
+  this.asyncDeleteData = promisify(this.deleteData)
 
   //Authentication
 
@@ -128,8 +136,9 @@ function Devless(url, token) {
       });
   };
 
-  //General RPC call
+  this.asyncAuthenticate = promisify(this.authenticate)
 
+  //General RPC call
   //RPC call
   this.rpc = function (serviceName, action, params, callback) {
     axios({
@@ -148,9 +157,11 @@ function Devless(url, token) {
       callback(response.data);
     })
       .catch(function (error) {
-        console.log(error);
+        callback(error)
       });
   };
+
+  this.asyncRPC = promisify(this.rpc)
 }
 
 module.exports = Devless;

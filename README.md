@@ -31,21 +31,25 @@ And you can now have access to all the methods exposed by the module. They inclu
 **Query (read) data from table**
 ```javascript
 dv.queryData(serviceName, tableName, queryParams, callback);
+dv.asyncQueryData(serviceName, tableName, queryParams);
 ```
 
 **Add data to table**
 ```javascript
 dv.addData(serviceName, tableName, data, callback);
+dv.asyncAddData(serviceName, tableName, data);
 ```
 
 **Update data in table**
 ```javascript
 dv.updateData(serviceName, tableName, identifierField, identifierValue, data, callback);
+dv.asyncUpdateData(serviceName, tableName, identifierField, identifierValue, data);
 ```
 
 **Delete data from table**
 ```javascript
 dv.deleteData(serviceName, tableName, identifierField, identifierValue, callback);
+dv.asyncDeleteData(serviceName, tableName, identifierField, identifierValue);
 ```
 
 
@@ -55,12 +59,14 @@ For *action*s including **signup** and **login**.
 
 ```javascript
 dv.authenticate(action, params, callback);
+dv.asyncAuthenticate(action, params);
 ```
 
 ### RPC
 
 ```javascript
 dv.rpc(serviceName, action, params, callback);
+dv.asyncRPC(serviceName, action, params);
 ```
 
 Note: This readme is a *WIP*. For more info on parameter definitions, etc, see the [DevLess Documentation](https://devless.gitbooks.io/devless-docs-1-3-0/http_api.html).
